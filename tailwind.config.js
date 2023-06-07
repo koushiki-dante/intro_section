@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       maxWidth: {
-        "page": "1280px",
+        page: "1280px",
       },
       padding: {
         "screen-edge": "1.5rem",
@@ -12,4 +12,4 @@ export default {
     },
   },
   plugins: [],
-}
+};
