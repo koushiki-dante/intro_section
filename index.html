@@ -2,14 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="stylesheet" href="./src/style.css" />
-    <link rel="stylesheet" href="./src/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;800&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Vite + TS</title>
   </head>
   <body>
-    <div class="mx-auto max-w-page px-screen-edge">
+    <section class="mx-auto max-w-page px-screen-edge pb-24 font-base">
       <header>
         <nav>
           <div class="flex items-center justify-between py-8">
@@ -48,7 +55,7 @@
         </nav>
       </header>
       <dialog 
-        class="max-w-[100vw] min-h-[100vh] w-full h-full px-screen-edge pt-8 m-0"
+        class="max-w-[100vw] min-h-[100vh] w-full h-full px-screen-edge pt-8 pb-24 m-0 xs:max-w-sm xs:ml-auto"
         navigation-dialog
         aria-labelledby="primary-navigation"
       >
@@ -83,80 +90,84 @@
         >
           <ul class="space-y-4">
             <li>
-              <button class="flex items-center gap-x-3">
-                <span>Features</span>
-                <svg
-                  class="w-4 h-4 mt-1"
-                  aria-hidden="true"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                >
-                  <path
-                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              <div class="">
-                <ul class="pt-4 pl-14 space-y-4">
-                  <li>
-                    <a class="relative" href="javascript: void(0)">
-                      <img class="absolute right-full pr-3 pt-1" src="/images/icon-todo.svg" alt="" loading="lazy" decoding="async">
-                      <span>Todo List</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="relative" href="javascript: void(0)">
-                      <img class="absolute right-full pr-3 pt-1" src="/images/icon-calendar.svg" alt="" loading="lazy" decoding="async">
-                      <span>Calendar</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="relative" href="javascript: void(0)">
-                      <img class="absolute right-full pr-[0.9rem] pt-1" src="/images/icon-reminders.svg" alt="" loading="lazy" decoding="async">
-                      <span>Reminders</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="relative" href="javascript: void(0)">
-                      <img class="absolute right-full pr-3 pt-1" src="/images/icon-planning.svg" alt="" loading="lazy" decoding="async">
-                      <span>Planning</span>
-                    </a>
-                  </li>
-                </ul>
+              <div data-accordion-root data-accordion-state="closed" class="group">
+                <button data-accordion-trigger class="flex items-center gap-x-3">
+                  <span>Features</span>
+                  <svg
+                    class="w-4 h-4 mt-1 pointer-events-none"
+                    aria-hidden="true"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                  >
+                    <path
+                      d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                <div class="group-data-[accordion-state=closed]:hidden group-data-[accordion-state=open]:block">
+                  <ul class="pt-4 pl-14 space-y-4">
+                    <li>
+                      <a class="relative" href="javascript: void(0)">
+                        <img class="absolute right-full pr-3 pt-1" src="/images/icon-todo.svg" alt="" loading="lazy" decoding="async">
+                        <span>Todo List</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="relative" href="javascript: void(0)">
+                        <img class="absolute right-full pr-3 pt-1" src="/images/icon-calendar.svg" alt="" loading="lazy" decoding="async">
+                        <span>Calendar</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="relative" href="javascript: void(0)">
+                        <img class="absolute right-full pr-[0.9rem] pt-1" src="/images/icon-reminders.svg" alt="" loading="lazy" decoding="async">
+                        <span>Reminders</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="relative" href="javascript: void(0)">
+                        <img class="absolute right-full pr-3 pt-1" src="/images/icon-planning.svg" alt="" loading="lazy" decoding="async">
+                        <span>Planning</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </li>
             <li>
-              <button class="flex items-center gap-x-3">
-                <span>Company</span>
-                <svg
-                  class="w-4 h-4 mt-1"
-                  aria-hidden="true"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                >
-                  <path
-                    d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </button>
-              <div class="">
-                <ul class="pt-4 pl-14 space-y-4">
-                  <li>
-                    <a href="javascript: void(0)">History</a>
-                  </li>
-                  <li>
-                    <a href="javascript: void(0)">Our Team</a>
-                  </li>
-                  <li>
-                    <a href="javascript: void(0)">Blog</a>
-                  </li>
-                </ul>
+              <div data-accordion-root data-accordion-state="closed" class="group">
+                <button data-accordion-trigger class="flex items-center gap-x-3">
+                  <span>Company</span>
+                  <svg
+                    class="w-4 h-4 mt-1 pointer-events-none"
+                    aria-hidden="true"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                  >
+                    <path
+                      d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </button>
+                <div class="group-data-[accordion-state=closed]:hidden group-data-[accordion-state=open]:block">
+                  <ul class="pt-4 pl-14 space-y-4">
+                    <li>
+                      <a href="javascript: void(0)">History</a>
+                    </li>
+                    <li>
+                      <a href="javascript: void(0)">Our Team</a>
+                    </li>
+                    <li>
+                      <a href="javascript: void(0)">Blog</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </li>
             <li>
@@ -166,33 +177,38 @@
               <a href="javascript: void(0)">About</a>
             </li>
           </ul>
-          <div class="pt-8">
-            <a class="block text-center" href="javascript: void(0)">Login</a>
-            <a class="block text-center" href="javascript: void(0)">Register</a>
+          <div class="space-y-2 pt-8">
+            <a class="block text-center py-2" href="javascript: void(0)">Login</a>
+            <a class="block text-center py-2 border border-black rounded-xl" href="javascript: void(0)">Register</a>
           </div>
         </div>
       </dialog>
       <main>
-        <div>
-          <picture>
-            <img
-              src="/images/image-hero-mobile.png"
-              alt=""
-              width="750"
-              height="564"
-              loading="eager"
-              decoding="sync"
-            />
-          </picture>
-          <div>
-            <h1>Make Remote Work</h1>
-            <p>
-              Get your team in sync, no matter your location. Streamline
-              processes, create team rituals, and watch productivity soar.
-            </p>
-            <button>Lear More</button>
+        <div class="space-y-12">
+          <div class="-mx-screen-edge">
+            <picture>
+              <img
+                class="w-full h-auto max-w-full"
+                src="/images/image-hero-mobile.png"
+                alt=""
+                width="750"
+                height="564"
+                loading="eager"
+                decoding="sync"
+              />
+            </picture>
           </div>
-          <ul>
+          <div class="space-y-8">
+            <div class="text-center space-y-6">
+              <h1 class="font-heading font-semibold text-4xl text-black">Make Remote Work</h1>
+              <p class="max-w-[42ch] text-lg mx-auto">
+                Get your team in sync, no matter your location. Streamline
+                processes, create team rituals, and watch productivity soar.
+              </p>
+            </div>
+            <a class="py-4 leading-none text-lg px-6 rounded-xl bg-black text-white block w-max mx-auto" href="javascript: void(0)">Learn More</a>
+          </div>
+          <ul class="flex flex-wrap justify-center gap-6">
             <li>
               <a href="javascript: void(0)">
                 <span class="sr-only">Our client, Databiz</span>
@@ -241,7 +257,7 @@
           </ul>
         </div>
       </main>
-    </div>
+    </section>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
