@@ -23,28 +23,30 @@ function setDialog() {
 }
 
 function accordion(accordionRoot: HTMLDivElement) {
-  const accordionTrigger = accordionRoot.querySelector("[data-accordion-trigger]"); 
+  const accordionTrigger = accordionRoot.querySelector(
+    "[data-accordion-trigger]"
+  );
 
-  if(!accordionTrigger) {
+  if (!accordionTrigger) {
     return;
   }
 
   accordionTrigger.addEventListener("click", () => {
     const accordionState = accordionRoot.getAttribute("data-accordion-state");
 
-    if(accordionState === "closed") {
+    if (accordionState === "closed") {
       accordionRoot.setAttribute("data-accordion-state", "open");
-    } else if(accordionState === "open") {
+    } else if (accordionState === "open") {
       accordionRoot.setAttribute("data-accordion-state", "closed");
     }
   });
 }
 
 function setAccordions() {
-  const accordionRoots = document.querySelectorAll("[data-accordion-root]"); 
+  const accordionRoots = document.querySelectorAll("[data-accordion-root]");
 
-  accordionRoots.forEach(root => {
-    if(!(root instanceof HTMLDivElement)) {
+  accordionRoots.forEach((root) => {
+    if (!(root instanceof HTMLDivElement)) {
       return;
     }
 
