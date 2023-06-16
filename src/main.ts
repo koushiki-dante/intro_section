@@ -1,62 +1,144 @@
 export {};
 
-function setDialog() {
-  const dialog = document.querySelector(
-    "[navigation-dialog]"
+function setMobileNavigation() {
+  const navDialog = document.querySelector(
+    "[data-mb-navigation-dialog]"
   ) as HTMLDialogElement;
-  const dialogOpenTrigger = document.querySelector(
-    "[dialog-open-trigger]"
+  const navOpenTrigger = document.querySelector(
+    "[data-mb-navigation-open-trigger]"
   ) as HTMLButtonElement;
-  const dialogCloseTrigger = document.querySelector(
-    "[dialog-close-trigger]"
+  const navCloseTrigger = document.querySelector(
+    "[data-mb-navigation-close-trigger]"
   ) as HTMLButtonElement;
 
-  dialogOpenTrigger.addEventListener("click", () => {
-    dialog.showModal();
-    dialogOpenTrigger.setAttribute("aria-expanded", "true");
+  navOpenTrigger.addEventListener("click", () => {
+    navDialog.showModal();
+    navOpenTrigger.setAttribute("aria-expanded", "true");
   });
 
-  dialogCloseTrigger.addEventListener("click", () => {
-    dialog.close();
-    dialogOpenTrigger.setAttribute("aria-expanded", "false");
+  navCloseTrigger.addEventListener("click", () => {
+    navDialog.close();
+    navOpenTrigger.setAttribute("aria-expanded", "false");
   });
 }
 
-function accordion(accordionRoot: HTMLDivElement) {
-  const accordionTrigger = accordionRoot.querySelector(
-    "[data-accordion-trigger]"
+function mobileNavigationItem(itemRoot: HTMLDivElement) {
+  const itemTrigger = itemRoot.querySelector(
+    "[data-mb-navigation-item-trigger]"
   );
 
-  if (!accordionTrigger) {
+  if (!itemTrigger) {
     return;
   }
 
-  accordionTrigger.addEventListener("click", () => {
-    const accordionState = accordionRoot.getAttribute("data-accordion-state");
+  itemTrigger.addEventListener("click", () => {
+    const itemState = itemRoot.getAttribute("data-mb-navigation-item-state");
 
-    if (accordionState === "closed") {
-      accordionRoot.setAttribute("data-accordion-state", "open");
-    } else if (accordionState === "open") {
-      accordionRoot.setAttribute("data-accordion-state", "closed");
+    if (itemState === "closed") {
+      itemRoot.setAttribute("data-mb-navigation-item-state", "open");
+      itemTrigger.setAttribute("aria-expanded", "true");
+    } else if (itemState === "open") {
+      itemRoot.setAttribute("data-mb-navigation-item-state", "closed");
+      itemTrigger.setAttribute("aria-expanded", "false");
     }
   });
 }
 
-function setAccordions() {
-  const accordionRoots = document.querySelectorAll("[data-accordion-root]");
+function setMobileNavigationItems() {
+  const navItemRoots = document.querySelectorAll("[data-mb-navigation-item]");
 
-  accordionRoots.forEach((root) => {
-    if (!(root instanceof HTMLDivElement)) {
+  navItemRoots.forEach((itemRoot) => {
+    if (!(itemRoot instanceof HTMLDivElement)) {
       return;
     }
 
-    accordion(root);
+    mobileNavigationItem(itemRoot);
+  });
+}
+
+function navigationItem(itemRoot: HTMLDivElement)  {
+  const itemModal = itemRoot.querySelector(
+    "[data-navigation-item-modal]"
+  ) as HTMLDialogElement;
+  const itemTrigger = itemRoot.querySelector(
+    "[data-navigation-item-trigger]"
+  ) as HTMLButtonElement;
+
+  if(!(itemModal instanceof HTMLDialogElement)) {
+    return;
+  } else if(!(itemTrigger instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  function openModal() {
+    itemModal.show();
+    itemRoot.setAttribute("data-navigation-item-state", "open");
+    itemTrigger.setAttribute("aria-expanded", "true");
+  }
+
+  function closeModal() {
+    itemModal.close();
+    itemRoot.setAttribute("data-navigation-item-state", "closed");
+    itemTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  function navigationState(): string | null {
+    return itemRoot.getAttribute("data-navigation-item-state");
+  }
+  
+  itemTrigger.addEventListener("mouseenter", () => {
+    if(navigationState() === "closed") {
+      openModal();
+    }
+  });
+
+  itemRoot.addEventListener("mouseleave", () => {
+    if(navigationState() === "open") {
+      closeModal();
+
+      // When the "mouseleave" event occurs, the window may or may not have this event 
+      // listener attached to it. 
+      window.removeEventListener("click", closeModalOnFocusLoss);
+    }
+  });
+  
+  function closeModalOnFocusLoss({ target }: MouseEvent) {
+    if(!(target instanceof HTMLElement)) {
+      return;
+    }
+
+    if(!itemModal.contains(target)) {
+      closeModal();
+      window.removeEventListener("click", closeModalOnFocusLoss);
+    }
+  }
+  
+  itemRoot.addEventListener("keyup", (e: KeyboardEvent) => {
+    const navState = navigationState();
+
+    if(navState === "open" && e.key === "Escape") {
+      closeModal();
+      window.removeEventListener("click", closeModalOnFocusLoss);
+    } else if(navState === "closed" && e.key === "Enter") {
+      openModal();
+      window.addEventListener("click", closeModalOnFocusLoss);
+    }
+  });
+}
+
+function setNavigationItems() {
+  const navigationItems = document.querySelectorAll("[data-navigation-item]") as NodeListOf<HTMLDivElement>;
+
+  navigationItems.forEach((item) => {
+    navigationItem(item);
   });
 }
 
 function main() {
-  setDialog();
-  setAccordions();
+  setMobileNavigation();
+  setMobileNavigationItems();
+  
+  setNavigationItems();
 }
 
 main();
